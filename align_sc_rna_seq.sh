@@ -2,7 +2,7 @@
 FASTQ_DATA_FOLDER="/cellfile/datapublic/jkoubele/leibniz_institute_data/FASTQ/20201014_582_KLR/GEX"
 OUTPUT_DATA_FOLDER="/cellfile/datapublic/jkoubele/leibniz_institute_data/aligned/20201014_582_KLR/GEX"
 
-for value in O_AL O_DR O_ND Y_AL Y_DR
+for value in O_AL O_DR O_ND O_NR Y_AL Y_DR
 do
    mkdir --parents ${OUTPUT_DATA_FOLDER}"/${value}"
    /cellfile/datapublic/jkoubele/STAR_2.7.11a/Linux_x86_64/STAR \
