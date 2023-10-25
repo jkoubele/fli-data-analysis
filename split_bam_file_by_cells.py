@@ -48,9 +48,6 @@ def split_star_solo_output_by_cell_barcodes(star_solo_output_path: Path,
 
 
 if __name__ == "__main__":
-    for folder in Path('/cellfile/datapublic/jkoubele/leibniz_institute_data/aligned/20201014_582_KLR/GEX').iterdir():
-        print(folder)
-        split_star_solo_output_by_cell_barcodes(star_solo_output_path=folder,
-                                                output_folder_path=
-                                                Path(
-                                                    '/cellfile/datapublic/jkoubele/leibniz_institute_data/splitted_by_cells/20201014_582_KLR/GEX'))
+    split_star_solo_output_by_cell_barcodes(star_solo_output_path=Path('/home/jakub/Desktop/liebniz_data/aligned/O_AL'),
+                                            output_folder_path=
+                                            Path('/home/jakub/Desktop/liebniz_data/splitted_by_cells'))
