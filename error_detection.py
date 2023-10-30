@@ -1,7 +1,6 @@
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from threading import Thread
 from typing import Optional
 
 import pysam
@@ -219,7 +218,14 @@ def process_cell_files(input_folder: Path,
 
 
 if __name__ == "__main__":
-    process_cell_files(input_folder=Path('/home/jakub/Desktop/liebniz_data/splitted_by_cells/O_AL'),
-                       output_folder=Path('/home/jakub/Desktop/liebniz_data/computed_errors/O_AL'),
-                       reference_genome_fasta_file_path=Path(
-                           '/home/jakub/Desktop/sc-error-rate/data/reference_genome/GRCm38.primary_assembly.genome.fa'))
+    for folder in Path(
+            '/cellfile/datapublic/jkoubele/leibniz_institute_data/splitted_by_cells/20201014_582_KLR/GEX').iterdir():
+        print(folder)
+        output_folder = Path(
+            '/cellfile/datapublic/jkoubele/leibniz_institute_data/computed_errors/20201014_582_KLR/GEX/') / folder.name
+        if output_folder.exists():
+            continue
+        process_cell_files(input_folder=folder,
+                           output_folder=output_folder,
+                           reference_genome_fasta_file_path=Path(
+                               '/cellfile/datapublic/jkoubele/STAR_2.7.11a/reference_genomes/GRCm38/GRCm38.primary_assembly.genome.fa'))

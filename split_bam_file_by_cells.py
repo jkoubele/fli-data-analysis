@@ -21,8 +21,8 @@ def split_bam_file_by_cell_barcodes(bam_file_path: Path,
     output_samfiles_by_barcode = {barcode: pysam.AlignmentFile(file_path, "wb",
                                                                template=samfile_input)
                                   for barcode, file_path in output_file_names_by_barcode.items()}
-    for read in tqdm(samfile_input, desc='Processing reads from the input .bam file'):
-        if not (read.has_tag('CB') and read.has_tag('UB')):
+    for read in tqdm(samfile_input, desc=f'Processing reads from the input .bam file {bam_file_path}'):
+        if not (read.has_tag('CB') and read.has_tag('UB') and read.get_tag('UB') != '-'):
             continue
 
         read_barcode = read.get_tag('CB')
@@ -48,6 +48,8 @@ def split_star_solo_output_by_cell_barcodes(star_solo_output_path: Path,
 
 
 if __name__ == "__main__":
-    split_star_solo_output_by_cell_barcodes(star_solo_output_path=Path('/home/jakub/Desktop/liebniz_data/aligned/O_AL'),
-                                            output_folder_path=
-                                            Path('/home/jakub/Desktop/liebniz_data/splitted_by_cells'))
+    for folder in Path(
+            '/cellfile/datapublic/jkoubele/leibniz_institute_data/aligned/20201014_582_KLR/GEX').iterdir():
+        split_star_solo_output_by_cell_barcodes(star_solo_output_path=folder,
+                                                output_folder_path=Path(
+                                                    '/cellfile/datapublic/jkoubele/leibniz_institute_data/splitted_by_cells/20201014_582_KLR/GEX/'))

@@ -4,7 +4,8 @@ import streamlit as st
 
 from error_detection import CellErrorStatistics
 
-detected_errors_data_folder_path = Path('')
+detected_errors_data_folder_path = Path(
+    '/cellfile/datapublic/jkoubele/leibniz_institute_data/computed_errors/20201014_582_KLR/GEX')
 
 
 def load_available_datasets() -> list[str]:
@@ -14,9 +15,13 @@ def load_available_datasets() -> list[str]:
 @st.cache_data
 def load_cell_error_statistics(dataset_name: str) -> list[CellErrorStatistics]:
     cell_error_statistics: list[CellErrorStatistics] = []
+    c = 0
     for file_path in (detected_errors_data_folder_path / dataset_name).iterdir():
         with open(file_path) as file:
             cell_error_statistics.append(CellErrorStatistics.from_json(file.read()))
+        c += 1
+        if c % 100 == 0:
+            print(c)
     return cell_error_statistics
 
 

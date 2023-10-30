@@ -1,2 +1,7 @@
+biopython==1.81
+dataclasses_json==0.6.1
+pandas==2.0.3
+pysam==0.22.0
 python-dotenv==1.0.0
+streamlit==1.27.2
 tqdm==4.65.0
